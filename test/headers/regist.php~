@@ -1,0 +1,13 @@
+
+
+
+
+
+
+<?php 
+echo"<p><a href='registrationform.php'>register now</a></p><br></br>";
+
+
+?>
+
+

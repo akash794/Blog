@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head><title>admin login</title>
+
+<?php 
+require("/var/www/html/testBlog/include/config2.php");
+
+
+
+$a=mysqli_Real_escape_string($conn,$_POST["username"]);
+$b=mysqli_Real_escape_string($conn,$_POST["password"]);
+$b2=md5($b);
+
+
+$sql="SELECT * FROM admin WHERE username = '".$a."' AND password = '".$b."'";
+$ret=mysqli_query($conn,$sql);
+//checking if querry works
+if( $ret==false)
+{
+  die('      the code dies' );
+}else{ echo  mysqli_error();}
+//if username paswoord exists -->creating associative array of the selected
+if (mysqli_num_rows($ret) > 0) {
+
+
+		session_start();
+    // output data of each row
+    while($row = mysqli_fetch_assoc($ret)) { $_SESSION['username']=$row["username"];
+						$_SESSION['userId']=$row["userId"];
+						$_SESSION['role']=$row['role'];
+$date = date("Y-m-d H:i:s");
+$sqlq="UPDATE admin SET  lastLogin ='".$date."' WHERE userId = '".$row['userId']."'";
+mysqli_query($conn,$sqlw);
+        echo "username " . $row["username"]. " - role: " . $row["role"]. " userId" . $row["userId"]. "<br>";
+    
+
+
+if(isset($_SESSION['userId'])){
+
+$sid= session_id();
+
+$_SESSION['sessionId']=$sid;}
+
+}
+} 
+
+#if($_GET['ul_id']!="" && is_numeric($_GET['ul_id'])){
+
+
+//3.1.4 if the user is logged in Greets the user with message
+if (isset($_SESSION['username']) and isset($_SESSION['userId'])){
+$username = $_SESSION['username'];
+
+echo "This is the admin Members Area
+";
+echo "<a href='logout.php'>Logout</a>";
+ 
+}
+
+
+
+
+
+
+
+?>
+</head>
+
+
+<?php include( "/var/www/html/testBlog/class/loginform.html");
+if (isset($_SESSION['sessionId'])) {
+   $rt = $_SERVER['REQUEST_TIME'];
+ $_SESSION['sStart']=$rt;
+$sql3="INSERT INTO sessiona (userId,username, sessionId, sStart, role) VALUES ('".$_SESSION['userId']."','".$_SESSION['username']."','".$sid."','".$_SESSION['sStart']."','".$_SESSION['role']."')";
+$retval= mysqli_query($conn,$sql3);
+}
+
+#1header
+if($_GET['ul_id']=$_SESSION['userId']){
+$host  = $_SERVER['HTTP_HOST'];
+$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$extra = "testBlog/postindex.php?";
+header("Location: http://$host/$extra");
+exit;
+
+}
+
+
+
+
+?>
+
+
+</html>

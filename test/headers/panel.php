@@ -1,0 +1,19 @@
+
+
+
+
+
+
+<?php 
+
+
+
+
+
+#user or admin
+if(isset($_SESSION['userId']) and ($_SESSION['role']==3)){
+echo"<p><a href='admin/admin.php'>admin panel</a></p><br></br>";
+}
+
+?>
+

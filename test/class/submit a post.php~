@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<?php
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = 'mysql';
+$db = 'post';
+$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db);
+if(! $conn )
+{
+  die('Could not connect: ' . mysql_error());
+}
+else{ echo 'connect';}
+
+
+$a=mysqli_real_escape_string($conn,$_POST['post_title']);
+$b=mysqli_real_escape_string($conn,$_POST['post_content']);
+$c=mysqli_real_escape_string($conn,$_POST['author']);
+$d=mysqli_real_escape_string($conn,$_POST['post_created']);
+$e=mysqli_real_escape_string($conn,$_POST['post_updated']);
+$f=mysqli_real_escape_string($conn,$_POST['post_category']);
+
+$sql = " INSERT INTO blogpost
+  (post_title,post_content,author,post_created,post_updated,post_category) VALUES('$a','$b','$c','$d','$e','$f')";
+
+$retval = mysqli_query( $conn, $sql);
+if(! $retval )
+{
+  die('Could not SUBMIT data: ' . mysql_error());
+}
+else{ echo "NEW POST POSTED";}
+
+mysqli_close($conn);
+?>
+
+</head>
+<body>
+<form id="newPost" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<div id='whole'>
+<h1><b>BLOG NAME</b></h1>
+<div>
+title<h3><input type="text" name= "post_title" /></h3>
+category<select name="post_category" form="newPost">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select> <br>post body</br>
+<textarea rows="4" cols="50" name="post_content" form="newPost">
+Enter text here...</textarea><br></br>
+<input type='text' name="author"><br></br>
+
+<input type="submit" name= "submit" value="submit"/>
+</form>
+
+</div>
+</body>
+</html>

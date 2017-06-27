@@ -1,0 +1,16 @@
+<?php
+
+include("include/config.php");
+
+if(isset($_SESSION['userId'] or $_SESSION['role']==3){
+
+
+
+include("testBlog/postedit.php");
+}
+else{echo"cant edit page";}
+
+
+
+
+?>

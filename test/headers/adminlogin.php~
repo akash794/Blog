@@ -1,0 +1,27 @@
+
+
+
+
+
+
+<?php 
+#any user
+if(isset($_SESSION['userId'])){
+
+}
+
+#user or admin
+elseif(isset($_SESSION['userId']) or ($_SESSION['role']==3){}
+#strict admin
+elseif(isset($_SESSION['userId']) and ($_SESSION['role']==3){
+
+}
+
+#anoun
+else{
+echo"<p><a href='login.php'>user login</a></p><br></br>";
+echo"<p><a href='login.php'>admin login</a></p><br></br>";
+
+}
+?>
+

@@ -1,0 +1,25 @@
+<?php
+
+require_once("/var/www/html/testBlog/include/config.php");
+
+
+
+	if (isset($_SESSION['sessionId'])) {
+   $rt = $_SERVER['REQUEST_TIME'];
+ $_SESSION['sStart']=$rt;
+$sql3="DELETE FROM sessiona WHERE userId = '".$_SESSION['userId']."'";
+$retval= mysqli_query($conn,$sql3);
+}
+
+
+
+
+
+mysqli_close($conn);
+	session_destroy();
+$host  = $_SERVER['HTTP_HOST'];
+$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+header("Location: http://$host/testBlog/postindex.php");
+exit;
+
+?>

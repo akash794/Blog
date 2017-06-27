@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<form id="registrationForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    
+	<p><label>Username</label><br />
+        <input type='text' name='username' value='<?php if(isset($error)){ echo $_POST['username'];}?>'></p>
+
+	<p><label>EmailID</label><br />
+    <input type='text' name='emailId' value='<?php if(isset($error)){ echo $_POST['emailId'];}?>'></p>
+
+	<p><label>First Name</label><br />
+    <input type='text' name='firstName' value='<?php if(isset($error)){ echo $_POST['firstName'];}?>'></p>
+
+	<p><label>Last Name</label><br />
+    <input type='text' name='lastName' value='<?php if(isset($error)){ echo $_POST['lastName'];}?>'></p>
+
+	<p><label>Birth Date</label><br />
+    <input type='date' name='dob' value='<?php if(isset($error)){ echo $_POST['dob'];}?>'></p>
+    
+    <p><input type='submit' name='submit' value='Add User'></p>
+
+</form>
+<?php 
+require("/var/www/html/testBlog/include/config.php");
+
+if($_POST['submit']=="Submit"){
+if(($userId!="") ){
+
+$a=mysqli_real_escape_string($conn,$_POST['username']);
+$c=mysqli_real_escape_string($conn,$_POST['emailId']);
+$d=mysqli_real_escape_string($conn,$_POST['firstName']);
+$e=mysqli_real_escape_string($conn,$_POST['lastName']);
+$f=mysqli_real_escape_string($conn,$_POST['dob']);
+
+$sql= "UPDATE user SET username='".$a."','emailId='".$c."',firstName='".$d."', lastName='".$e."', dob='".$f"'";
+$retval = mysqli_query( $conn, $sql);
+
+mysqli_close($conn);
+?>
+</body>
+</html>

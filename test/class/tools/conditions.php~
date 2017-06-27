@@ -1,0 +1,7 @@
+<?php
+
+
+
+if(isset($_SESSION['userId']) or ($_SESSION['role']=='3'))
+
+?>

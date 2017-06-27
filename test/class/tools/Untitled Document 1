@@ -1,0 +1,11 @@
+########forapproval
+
+
+<?php if($_SESSION['role']==3){ if(isset($row['role'])){$sel='Selected="Selected"';}else{$sel='""';}
+				echo "<select name='role' form='userindex' >";
+				switch($row['role']){ case "1":	echo "<option value='1'". $sel .">1</option>";break;
+							case "2":echo "<option value='2'". $sel.">2</option>";break;
+							case "3":echo "<option value='3'". $sel.">3</option></select>";break;
+							default: echo"asdasdas";}	}  ?>
+
+<br></br>

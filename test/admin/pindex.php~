@@ -1,0 +1,13 @@
+
+
+
+
+
+
+<?php 
+
+echo"<p><a href='/testBlog/postindex.php'>post index</a></p>";
+
+?>
+
+

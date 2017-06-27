@@ -1,0 +1,19 @@
+
+
+
+
+
+
+<?php 
+
+
+
+
+
+#user or admin
+if(isset($_SESSION['userId'])){
+echo"<p><a href='admin/useredit.php?uid=".$_SESSION['userId']."'>edit your details</a></p><br></br>";
+}
+
+?>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head><title>user login</title>
+</head><body>
+<?php 
+require("class/class.php");  session_start();
+if(isset($_SESSION['username'])){
+				$host  = $_SERVER['HTTP_HOST'];
+				$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+				$extra = "test/postindex.php?ul_id=".$_SESSION['userId'];
+				header("Location: http://$host/$extra");
+
+					}
+
+
+
+
+if($_POST['submit']=="Submit"){//echo "<pre>";print_r($_POST);die;
+$a=$_POST["username"];
+$b=$_POST["password"];
+$b2=md5($b);
+
+
+$obj= new DB();
+$obj2= new user();
+
+$data = $obj2->login($a,$b2);
+if(isset($_SESSION['username'])){
+$obj2->lastlogin();
+$host  = $_SERVER['HTTP_HOST'];
+				$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+				$extra = "test/postindex.php?ul_id=".$_SESSION['userId'];
+				header("Location: http://$host/$extra");exit;
+}
+
+
+
+
+
+}
+
+
+echo $_SESSION['username'];
+
+// Finally, destroy the session.
+
+?>
+</body>
+<?php include_once( "class/loginform.html");
+mysqli_close($this->connect);
+
+?>
+
+</html>
